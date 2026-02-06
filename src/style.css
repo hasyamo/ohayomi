@@ -430,6 +430,59 @@ body {
   width: 100%;
 }
 
+/* --- Order List --- */
+
+.order-list {
+  min-height: 40px;
+}
+
+.order-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--outline-variant);
+  font-size: 14px;
+}
+
+.order-name {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.order-btns {
+  display: flex;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+.order-btn {
+  width: 36px;
+  height: 36px;
+  border: 1px solid var(--outline-variant);
+  border-radius: 8px;
+  background: var(--surface-bright);
+  color: var(--on-surface);
+  font-size: 14px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.12s;
+}
+
+.order-btn:active {
+  background: var(--surface-container);
+}
+
+.order-btn:disabled {
+  opacity: 0.25;
+  cursor: default;
+}
+
 /* --- Archived List --- */
 
 .archived-list {

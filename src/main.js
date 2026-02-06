@@ -12,6 +12,7 @@ import {
   getPendingCreatorId,
   clearPendingCreatorId,
   parseNoteUrl,
+  reorderCreators,
 } from './storage.js'
 import { fetchCreator } from './api.js'
 
@@ -329,6 +330,7 @@ $('editCancelBtn').addEventListener('click', () => {
 // -- Settings modal --
 
 $('settingsBtn').addEventListener('click', () => {
+  renderOrderList()
   renderArchivedList()
   openModal(settingsModal)
 })
@@ -340,6 +342,56 @@ $('resetBtn').addEventListener('click', () => {
   render()
   closeModal(settingsModal)
 })
+
+const orderList = $('orderList')
+
+function renderOrderList() {
+  const creators = getActiveCreators()
+  if (creators.length === 0) {
+    orderList.innerHTML = '<p class="archived-empty">なし</p>'
+    return
+  }
+
+  orderList.innerHTML = creators
+    .map(
+      (c, i) => `
+    <div class="order-item">
+      <span class="order-name">${escapeHtml(c.name)}</span>
+      <div class="order-btns">
+        <button class="order-btn" data-move-up="${c.id}" ${i === 0 ? 'disabled' : ''}>▲</button>
+        <button class="order-btn" data-move-down="${c.id}" ${i === creators.length - 1 ? 'disabled' : ''}>▼</button>
+      </div>
+    </div>
+  `
+    )
+    .join('')
+
+  orderList.querySelectorAll('[data-move-up]').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const ids = getActiveCreators().map((c) => c.id)
+      const idx = ids.indexOf(btn.dataset.moveUp)
+      if (idx > 0) {
+        ;[ids[idx - 1], ids[idx]] = [ids[idx], ids[idx - 1]]
+        reorderCreators(ids)
+        renderOrderList()
+        render()
+      }
+    })
+  })
+
+  orderList.querySelectorAll('[data-move-down]').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const ids = getActiveCreators().map((c) => c.id)
+      const idx = ids.indexOf(btn.dataset.moveDown)
+      if (idx < ids.length - 1) {
+        ;[ids[idx], ids[idx + 1]] = [ids[idx + 1], ids[idx]]
+        reorderCreators(ids)
+        renderOrderList()
+        render()
+      }
+    })
+  })
+}
 
 function renderArchivedList() {
   const archived = getArchivedCreators()
