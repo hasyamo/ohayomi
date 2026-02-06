@@ -21,12 +21,17 @@
   box-sizing: border-box;
 }
 
+html {
+  overflow-x: hidden;
+}
+
 body {
   font-family: -apple-system, BlinkMacSystemFont, 'Hiragino Sans', 'Segoe UI', Roboto, sans-serif;
   background: var(--surface);
   color: var(--on-surface);
   -webkit-tap-highlight-color: transparent;
   -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
 }
 
 #app {
@@ -35,6 +40,7 @@ body {
   min-height: 100dvh;
   background: var(--surface);
   position: relative;
+  overflow-x: hidden;
 }
 
 /* --- Header (M3 Top App Bar) --- */
@@ -211,7 +217,7 @@ body {
 .fab {
   position: fixed;
   bottom: 28px;
-  right: calc(50% - 240px + 20px);
+  right: 20px;
   width: 56px;
   height: 56px;
   border-radius: 50%;
@@ -228,12 +234,6 @@ body {
   justify-content: center;
   transition: transform 0.12s, box-shadow 0.12s;
   z-index: 10;
-}
-
-@media (max-width: 480px) {
-  .fab {
-    right: 20px;
-  }
 }
 
 .fab:active {
