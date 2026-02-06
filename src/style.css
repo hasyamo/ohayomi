@@ -279,6 +279,24 @@ body {
   transform: translateY(0);
 }
 
+/* Top-aligned modals (with input fields, avoids iOS keyboard) */
+
+.modal-overlay--top {
+  align-items: flex-start;
+  padding-top: env(safe-area-inset-top, 0px);
+}
+
+.modal--top {
+  border-radius: 0 0 28px 28px;
+  padding-bottom: 28px;
+  max-height: 60dvh;
+  transform: translateY(-100%);
+}
+
+.modal-overlay--top.active .modal--top {
+  transform: translateY(0);
+}
+
 .modal-title {
   font-size: 18px;
   font-weight: 600;
