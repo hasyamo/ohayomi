@@ -61,9 +61,9 @@ function render() {
   })
 
   if (creators.length > 0) {
-    progressText.textContent = `今日の朝活 (${readCount}/${creators.length} 読了, ${commentedCount}/${creators.length} コメント)`
+    progressText.textContent = `推しクリエイター (${readCount}/${creators.length} 読了, ${commentedCount}/${creators.length} コメント)`
   } else {
-    progressText.textContent = '今日の朝活'
+    progressText.textContent = '推しクリエイター'
   }
 
   // Checklist
@@ -388,6 +388,12 @@ async function refreshAllCreators() {
     }
   }
   render()
+}
+
+// --- Service Worker ---
+
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/sw.js')
 }
 
 // --- Init ---
