@@ -202,7 +202,6 @@ $('addBtn').addEventListener('click', () => {
   registerPreview.hidden = true
   registerConfirmBtn.disabled = true
   openModal(registerModal)
-  noteUrlInput.focus()
 })
 
 noteUrlInput.addEventListener('input', () => {
