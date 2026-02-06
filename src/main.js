@@ -201,7 +201,9 @@ $('addBtn').addEventListener('click', () => {
   urlError.textContent = ''
   registerPreview.hidden = true
   registerConfirmBtn.disabled = true
+  noteUrlInput.setAttribute('readonly', '')
   openModal(registerModal)
+  setTimeout(() => noteUrlInput.removeAttribute('readonly'), 400)
 })
 
 noteUrlInput.addEventListener('input', () => {
