@@ -65,9 +65,9 @@ function render() {
   const dateStr = `${now.getMonth() + 1}/${now.getDate()}(${['日','月','火','水','木','金','土'][now.getDay()]})`
 
   if (creators.length > 0) {
-    progressText.textContent = `${dateStr} - ${readCount}/${creators.length} 読了, ${commentedCount}/${creators.length} コメント`
+    progressText.textContent = `推しクリエイター ${dateStr} - ${readCount}/${creators.length} 読了, ${commentedCount}/${creators.length} コメント`
   } else {
-    progressText.textContent = dateStr
+    progressText.textContent = `推しクリエイター ${dateStr}`
   }
 
   // Checklist
