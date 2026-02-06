@@ -61,10 +61,13 @@ function render() {
     if (s.commented) commentedCount++
   })
 
+  const now = new Date()
+  const dateStr = `${now.getMonth() + 1}/${now.getDate()}(${['日','月','火','水','木','金','土'][now.getDay()]})`
+
   if (creators.length > 0) {
-    progressText.textContent = `推しクリエイター (${readCount}/${creators.length} 読了, ${commentedCount}/${creators.length} コメント)`
+    progressText.textContent = `${dateStr} - ${readCount}/${creators.length} 読了, ${commentedCount}/${creators.length} コメント`
   } else {
-    progressText.textContent = '推しクリエイター'
+    progressText.textContent = dateStr
   }
 
   // Checklist
