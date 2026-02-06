@@ -1,0 +1,457 @@
+:root {
+  --primary: #00b86b;
+  --primary-container: #b8f5d5;
+  --on-primary: #fff;
+  --on-primary-container: #00391e;
+  --surface: #f9fdf8;
+  --surface-container: #edf2eb;
+  --surface-container-high: #e2e8e0;
+  --surface-bright: #fff;
+  --on-surface: #1a1c19;
+  --on-surface-variant: #414941;
+  --outline: #717971;
+  --outline-variant: #c1c9bf;
+  --error: #ba1a1a;
+  --error-container: #ffdad6;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Hiragino Sans', 'Segoe UI', Roboto, sans-serif;
+  background: var(--surface);
+  color: var(--on-surface);
+  -webkit-tap-highlight-color: transparent;
+  -webkit-font-smoothing: antialiased;
+}
+
+#app {
+  max-width: 480px;
+  margin: 0 auto;
+  min-height: 100dvh;
+  background: var(--surface);
+  position: relative;
+}
+
+/* --- Header (M3 Top App Bar) --- */
+
+.header {
+  background: var(--primary);
+  color: var(--on-primary);
+  padding: 20px 20px 18px;
+  position: relative;
+}
+
+.header-title {
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+
+.header-subtitle {
+  font-size: 12px;
+  margin-top: 4px;
+  opacity: 0.85;
+}
+
+.header-settings-btn {
+  position: absolute;
+  top: 16px;
+  right: 12px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  line-height: 0;
+  color: var(--on-primary);
+  border-radius: 50%;
+  transition: background 0.12s;
+}
+
+.header-settings-btn:active {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+/* --- Checklist --- */
+
+.checklist {
+  padding: 4px 0 88px;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 80px 20px;
+  color: var(--on-surface-variant);
+  font-size: 14px;
+  line-height: 2;
+}
+
+.creator-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 20px;
+  background: var(--surface-bright);
+  border-bottom: 1px solid var(--outline-variant);
+  cursor: pointer;
+  transition: background 0.12s;
+  user-select: none;
+}
+
+.creator-item:active {
+  background: var(--surface-container);
+}
+
+.creator-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--surface-container-high);
+  flex-shrink: 0;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  color: var(--on-surface-variant);
+}
+
+.creator-icon--done {
+  opacity: 0.35;
+}
+
+.creator-icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.creator-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.creator-name {
+  font-size: 15px;
+  font-weight: 500;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  display: block;
+  color: var(--on-surface);
+}
+
+.creator-tags {
+  display: flex;
+  gap: 6px;
+  margin-top: 5px;
+  cursor: pointer;
+}
+
+.creator-tags:active .tag {
+  opacity: 0.6;
+}
+
+.tag {
+  font-size: 11px;
+  font-weight: 500;
+  padding: 2px 10px;
+  border-radius: 8px;
+  line-height: 1.5;
+}
+
+.tag-unread {
+  background: var(--primary-container);
+  color: var(--on-primary-container);
+}
+
+.tag-read {
+  background: var(--surface-container);
+  color: var(--outline);
+}
+
+.tag-commented {
+  background: var(--surface-container);
+  color: var(--outline);
+}
+
+.badge-new {
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--on-primary);
+  background: var(--primary);
+  padding: 1px 7px;
+  border-radius: 8px;
+  vertical-align: middle;
+  margin-left: 6px;
+}
+
+.creator-edit-btn {
+  background: none;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+  padding: 6px;
+  color: var(--outline);
+  flex-shrink: 0;
+  border-radius: 50%;
+  transition: background 0.12s;
+}
+
+.creator-edit-btn:active {
+  background: var(--surface-container);
+}
+
+/* --- FAB (M3 FAB) --- */
+
+.fab {
+  position: fixed;
+  bottom: 28px;
+  right: calc(50% - 240px + 20px);
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--primary-container);
+  color: var(--on-primary-container);
+  font-size: 26px;
+  border: none;
+  cursor: pointer;
+  box-shadow:
+    0 1px 3px rgba(0, 0, 0, 0.12),
+    0 4px 8px rgba(0, 0, 0, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.12s, box-shadow 0.12s;
+  z-index: 10;
+}
+
+@media (max-width: 480px) {
+  .fab {
+    right: 20px;
+  }
+}
+
+.fab:active {
+  transform: scale(0.95);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+/* --- Modal (M3 Bottom Sheet) --- */
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.32);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  z-index: 100;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s;
+}
+
+.modal-overlay.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.modal {
+  background: var(--surface-bright);
+  border-radius: 28px 28px 0 0;
+  padding: 24px 24px 28px;
+  width: 100%;
+  max-width: 480px;
+  transform: translateY(100%);
+  transition: transform 0.3s cubic-bezier(0.2, 0, 0, 1);
+}
+
+.modal-overlay.active .modal {
+  transform: translateY(0);
+}
+
+.modal-title {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 20px;
+  color: var(--on-surface);
+}
+
+.modal-subtitle {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--on-surface-variant);
+  margin-top: 24px;
+  margin-bottom: 8px;
+}
+
+.modal-label {
+  display: block;
+  font-size: 12px;
+  color: var(--on-surface-variant);
+  margin-bottom: 6px;
+  font-weight: 500;
+}
+
+.modal-input {
+  width: 100%;
+  padding: 14px 16px;
+  border: 1px solid var(--outline-variant);
+  border-radius: 12px;
+  font-size: 15px;
+  outline: none;
+  transition: border-color 0.15s;
+  background: var(--surface-bright);
+  color: var(--on-surface);
+}
+
+.modal-input:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 1px var(--primary);
+}
+
+.modal-error {
+  color: var(--error);
+  font-size: 12px;
+  margin-top: 6px;
+  min-height: 16px;
+}
+
+.modal-preview {
+  margin-top: 14px;
+  padding: 14px 16px;
+  background: var(--primary-container);
+  border-radius: 12px;
+  font-size: 14px;
+  color: var(--on-primary-container);
+}
+
+.modal-preview .modal-label {
+  margin-top: 12px;
+  color: var(--on-primary-container);
+  opacity: 0.7;
+}
+
+.modal-creator-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.modal-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 24px;
+}
+
+.modal-actions-vertical {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.spacer {
+  flex: 1;
+}
+
+/* --- Buttons (M3 Filled / Tonal / Text) --- */
+
+.btn {
+  padding: 12px 24px;
+  border: none;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: box-shadow 0.12s, opacity 0.12s;
+  letter-spacing: 0.01em;
+}
+
+.btn:active {
+  opacity: 0.8;
+}
+
+.btn:disabled {
+  opacity: 0.38;
+  cursor: default;
+}
+
+.btn-primary {
+  background: var(--primary);
+  color: var(--on-primary);
+}
+
+.btn-secondary {
+  background: var(--surface-container-high);
+  color: var(--on-surface-variant);
+}
+
+.btn-danger {
+  background: var(--error-container);
+  color: var(--error);
+}
+
+/* --- Status Checkbox --- */
+
+.status-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+  border: 1px solid var(--outline-variant);
+  border-radius: 12px;
+  font-size: 15px;
+  cursor: pointer;
+  transition: background 0.12s, border-color 0.12s;
+  user-select: none;
+}
+
+.status-checkbox:has(input:checked) {
+  background: var(--primary-container);
+  border-color: var(--primary);
+}
+
+.status-checkbox input {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--primary);
+  cursor: pointer;
+}
+
+.btn-full {
+  width: 100%;
+}
+
+/* --- Archived List --- */
+
+.archived-list {
+  min-height: 40px;
+}
+
+.archived-empty {
+  color: var(--on-surface-variant);
+  font-size: 13px;
+  padding: 8px 0;
+}
+
+.archived-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--outline-variant);
+  font-size: 14px;
+}
+
+.archived-item .btn {
+  padding: 6px 16px;
+  font-size: 12px;
+}

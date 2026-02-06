@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#00b86b" />
+    <title>おはヨミ</title>
+  </head>
+  <body>
+    <div id="app">
+      <!-- Header -->
+      <header class="header">
+        <h1 class="header-title">おはヨミ</h1>
+        <p class="header-subtitle" id="progressText">今日の朝活</p>
+        <button class="header-settings-btn" id="settingsBtn" aria-label="設定">
+          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="3"></circle>
+            <path d="M12 1v6m0 6v6m11-7h-6m-6 0H1m17.07-7.07l-4.24 4.24m-4.24 4.24L5.93 17.07m12.14 0l-4.24-4.24m-4.24-4.24L5.93 5.93"></path>
+          </svg>
+        </button>
+      </header>
+
+      <!-- Checklist -->
+      <main class="checklist" id="checklist">
+        <div class="empty-state" id="emptyState">
+          <p>クリエイターが登録されていません</p>
+          <p>右下の＋ボタンから追加しましょう</p>
+        </div>
+      </main>
+
+      <!-- FAB -->
+      <button class="fab" id="addBtn" aria-label="クリエイター追加">＋</button>
+    </div>
+
+    <!-- Registration Modal -->
+    <div class="modal-overlay" id="registerModal">
+      <div class="modal">
+        <h2 class="modal-title">クリエイター追加</h2>
+        <label class="modal-label" for="noteUrlInput">noteのURLを貼り付け</label>
+        <input
+          type="url"
+          id="noteUrlInput"
+          class="modal-input"
+          placeholder="https://note.com/username/n/xxxxx"
+        />
+        <p class="modal-error" id="urlError"></p>
+        <div class="modal-preview" id="registerPreview" hidden>
+          <p>ユーザー名: <strong id="previewUsername"></strong></p>
+          <label class="modal-label" for="displayNameInput">表示名</label>
+          <input type="text" id="displayNameInput" class="modal-input" />
+        </div>
+        <div class="modal-actions">
+          <button class="btn btn-secondary" id="registerCancelBtn">キャンセル</button>
+          <button class="btn btn-primary" id="registerConfirmBtn" disabled>追加</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Status Modal -->
+    <div class="modal-overlay" id="statusModal">
+      <div class="modal">
+        <div class="modal-creator-info" id="statusCreatorInfo"></div>
+        <div class="modal-actions-vertical">
+          <label class="status-checkbox">
+            <input type="checkbox" id="statusReadCheck" />
+            <span>読んだ</span>
+          </label>
+          <label class="status-checkbox">
+            <input type="checkbox" id="statusCommentedCheck" />
+            <span>コメントした</span>
+          </label>
+        </div>
+        <div class="modal-actions">
+          <button class="btn btn-secondary" id="statusCancelBtn">キャンセル</button>
+          <button class="btn btn-primary" id="statusConfirmBtn">OK</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Edit Modal -->
+    <div class="modal-overlay" id="editModal">
+      <div class="modal">
+        <h2 class="modal-title" id="editTitle">クリエイター編集</h2>
+        <label class="modal-label" for="editNameInput">表示名</label>
+        <input type="text" id="editNameInput" class="modal-input" />
+        <div class="modal-actions">
+          <button class="btn btn-danger" id="editArchiveBtn">アーカイブ</button>
+          <div class="spacer"></div>
+          <button class="btn btn-secondary" id="editCancelBtn">キャンセル</button>
+          <button class="btn btn-primary" id="editSaveBtn">保存</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Settings Modal -->
+    <div class="modal-overlay" id="settingsModal">
+      <div class="modal">
+        <h2 class="modal-title">設定</h2>
+        <button class="btn btn-secondary btn-full" id="resetBtn">ステータスをリセット</button>
+        <h3 class="modal-subtitle">アーカイブ済み</h3>
+        <div id="archivedList" class="archived-list"></div>
+        <div class="modal-actions">
+          <button class="btn btn-secondary" id="settingsCloseBtn">閉じる</button>
+        </div>
+      </div>
+    </div>
+
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
