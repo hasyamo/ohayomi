@@ -184,6 +184,16 @@ document.querySelectorAll('.modal-overlay').forEach((overlay) => {
   })
 })
 
+// iOS keyboard: scroll focused input into view
+if (visualViewport) {
+  visualViewport.addEventListener('resize', () => {
+    const el = document.activeElement
+    if (el && (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA')) {
+      setTimeout(() => el.scrollIntoView({ block: 'center', behavior: 'smooth' }), 100)
+    }
+  })
+}
+
 // -- Registration modal --
 
 $('addBtn').addEventListener('click', () => {
