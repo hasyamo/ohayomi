@@ -13,6 +13,8 @@ import {
   clearPendingCreatorId,
   parseNoteUrl,
   reorderCreators,
+  exportData,
+  importData,
 } from './storage.js'
 import { fetchCreator } from './api.js'
 
@@ -353,6 +355,36 @@ $('resetBtn').addEventListener('click', () => {
   resetAllStatus()
   render()
   closeModal(settingsModal)
+})
+
+$('exportBtn').addEventListener('click', () => {
+  const json = exportData()
+  const blob = new Blob([json], { type: 'application/json' })
+  const a = document.createElement('a')
+  a.href = URL.createObjectURL(blob)
+  a.download = 'ohayomi-backup.json'
+  a.click()
+  URL.revokeObjectURL(a.href)
+})
+
+const importFile = $('importFile')
+$('importBtn').addEventListener('click', () => importFile.click())
+importFile.addEventListener('change', (e) => {
+  const file = e.target.files[0]
+  if (!file) return
+  const reader = new FileReader()
+  reader.onload = () => {
+    try {
+      importData(reader.result)
+      render()
+      closeModal(settingsModal)
+      refreshAllCreators()
+    } catch {
+      alert('ファイルの読み込みに失敗しました')
+    }
+  }
+  reader.readAsText(file)
+  importFile.value = ''
 })
 
 const orderList = $('orderList')

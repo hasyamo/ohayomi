@@ -150,6 +150,18 @@ export function clearPendingCreatorId() {
   sessionStorage.removeItem(KEYS.pendingCreatorId)
 }
 
+// --- Export / Import ---
+
+export function exportData() {
+  return JSON.stringify(getCreators(), null, 2)
+}
+
+export function importData(json) {
+  const data = JSON.parse(json)
+  if (!Array.isArray(data)) throw new Error('Invalid format')
+  saveCreators(data)
+}
+
 // --- URL Parsing ---
 
 export function parseNoteUrl(url) {

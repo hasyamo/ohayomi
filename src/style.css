@@ -530,3 +530,12 @@ body {
   padding: 6px 16px;
   font-size: 12px;
 }
+
+.data-actions {
+  display: flex;
+  gap: 12px;
+}
+
+.data-actions .btn {
+  flex: 1;
+}
