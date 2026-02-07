@@ -153,13 +153,28 @@ export function clearPendingCreatorId() {
 // --- Export / Import ---
 
 export function exportData() {
-  return JSON.stringify(getCreators(), null, 2)
+  return JSON.stringify({
+    creators: getCreators(),
+    dailyStatus: getDailyStatus(),
+    lastResetAt: getLastResetAt(),
+  }, null, 2)
 }
 
 export function importData(json) {
   const data = JSON.parse(json)
-  if (!Array.isArray(data)) throw new Error('Invalid format')
-  saveCreators(data)
+  // 新形式(オブジェクト)
+  if (data && data.creators) {
+    saveCreators(data.creators)
+    if (data.dailyStatus) saveDailyStatus(data.dailyStatus)
+    if (data.lastResetAt) saveLastResetAt(data.lastResetAt)
+    return
+  }
+  // 旧形式(配列)との互換
+  if (Array.isArray(data)) {
+    saveCreators(data)
+    return
+  }
+  throw new Error('Invalid format')
 }
 
 // --- URL Parsing ---
