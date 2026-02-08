@@ -152,7 +152,7 @@ body {
 }
 
 .creator-tags {
-  display: flex;
+  display: inline-flex;
   gap: 6px;
   margin-top: 5px;
   cursor: pointer;
