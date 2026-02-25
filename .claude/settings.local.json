@@ -1,0 +1,26 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(node --version:*)",
+      "Bash(npm --version:*)",
+      "Bash(npm create:*)",
+      "Bash(npm install:*)",
+      "Bash(npx vite:*)",
+      "WebFetch(domain:falling-mouse-736b.hasyamo.workers.dev)",
+      "Bash(git init:*)",
+      "Bash(git add:*)",
+      "Bash(git commit -m \"$\\(cat <<''EOF''\nPhase 1: おはヨミ基本機能の実装\n\n- Vanilla JS + Vite でプロジェクトセットアップ\n- クリエイター登録（noteURL解析・表示名編集）\n- チェックリスト表示（読んだ/コメントの独立フラグ）\n- noteページ遷移・復帰検知・ステータスモーダル\n- タグタップでステータス直接変更\n- アーカイブ・設定・日次リセット（AM5:00基準）\n- APIプロキシ連携（アイコン・記事数・新着判定）\n- Material Design 3 テーマ（緑アクセント）\n\nCo-Authored-By: Claude Opus 4.6 <noreply@anthropic.com>\nEOF\n\\)\")",
+      "Bash(git commit -m \"$\\(cat <<''EOF''\nPWA化とヘッダーテキスト変更\n\n- manifest.json / Service Worker / 仮アイコン追加\n- iOS Safari向けmeta tag追加\n- ヘッダーを「今日の朝活」→「推しクリエイター」に変更\n\n🤖 Generated with [Claude Code]\\(https://claude.com/claude-code\\)\n\nCo-Authored-By: Claude <noreply@anthropic.com>\nEOF\n\\)\")",
+      "Bash(git remote add:*)",
+      "Bash(git commit -m \"$\\(cat <<''EOF''\nGitHub Pagesデプロイ設定\n\n- GitHub Actions ワークフロー追加\n- Vite base を /ohayomi/ に設定\n- manifest・SW のパスを相対パスに修正\n\n🤖 Generated with [Claude Code]\\(https://claude.com/claude-code\\)\n\nCo-Authored-By: Claude <noreply@anthropic.com>\nEOF\n\\)\")",
+      "Bash(git push:*)",
+      "Bash(git commit:*)",
+      "Bash(netstat:*)",
+      "Bash(findstr:*)",
+      "Bash(git -C C:mecodeohayomi status)",
+      "Bash(node -e:*)",
+      "Bash(npx sharp-cli:*)",
+      "Bash(where:*)"
+    ]
+  }
+}
