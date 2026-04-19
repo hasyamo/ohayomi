@@ -357,35 +357,62 @@ $('resetBtn').addEventListener('click', () => {
   closeModal(settingsModal)
 })
 
+const exportModal = $('exportModal')
+const importModal = $('importModal')
+const exportText = $('exportText')
+const importText = $('importText')
+const importError = $('importError')
+
 $('exportBtn').addEventListener('click', () => {
-  const json = exportData()
-  const blob = new Blob([json], { type: 'application/json' })
-  const a = document.createElement('a')
-  a.href = URL.createObjectURL(blob)
-  a.download = 'ohayomi-backup.json'
-  a.click()
-  URL.revokeObjectURL(a.href)
+  exportText.value = exportData()
+  closeModal(settingsModal)
+  openModal(exportModal)
+  setTimeout(() => {
+    exportText.focus()
+    exportText.select()
+  }, 100)
 })
 
-const importFile = $('importFile')
-$('importBtn').addEventListener('click', () => importFile.click())
-importFile.addEventListener('change', (e) => {
-  const file = e.target.files[0]
-  if (!file) return
-  const reader = new FileReader()
-  reader.onload = () => {
-    try {
-      importData(reader.result)
-      render()
-      closeModal(settingsModal)
-      refreshAllCreators()
-    } catch {
-      alert('ファイルの読み込みに失敗しました')
-    }
+$('exportCopyBtn').addEventListener('click', async () => {
+  try {
+    await navigator.clipboard.writeText(exportText.value)
+    $('exportCopyBtn').textContent = 'コピーしました'
+    setTimeout(() => { $('exportCopyBtn').textContent = 'コピー' }, 1500)
+  } catch {
+    exportText.select()
+    document.execCommand('copy')
+    $('exportCopyBtn').textContent = 'コピーしました'
+    setTimeout(() => { $('exportCopyBtn').textContent = 'コピー' }, 1500)
   }
-  reader.readAsText(file)
-  importFile.value = ''
 })
+
+$('exportCloseBtn').addEventListener('click', () => closeModal(exportModal))
+
+$('importBtn').addEventListener('click', () => {
+  importText.value = ''
+  importError.textContent = ''
+  closeModal(settingsModal)
+  openModal(importModal)
+  setTimeout(() => importText.focus(), 100)
+})
+
+$('importConfirmBtn').addEventListener('click', () => {
+  const json = importText.value.trim()
+  if (!json) {
+    importError.textContent = 'テキストを貼り付けてください'
+    return
+  }
+  try {
+    importData(json)
+    render()
+    closeModal(importModal)
+    refreshAllCreators()
+  } catch {
+    importError.textContent = '読み込みに失敗しました。正しい形式のテキストを貼り付けてください。'
+  }
+})
+
+$('importCancelBtn').addEventListener('click', () => closeModal(importModal))
 
 const orderList = $('orderList')
 
@@ -486,6 +513,48 @@ async function refreshAllCreators() {
   render()
 }
 
+// --- Version update notice ---
+
+const APP_VERSION = __APP_VERSION__
+const VERSION_KEY = 'ohayomi_lastSeenVersion'
+
+async function checkVersionUpdate() {
+  const lastSeen = localStorage.getItem(VERSION_KEY)
+  if (lastSeen === APP_VERSION) return
+
+  // 初回はメッセージを出さず記録のみ
+  if (!lastSeen) {
+    localStorage.setItem(VERSION_KEY, APP_VERSION)
+    return
+  }
+
+  // 現バージョンの更新内容を取得
+  let items = null
+  try {
+    const res = await fetch(import.meta.env.BASE_URL + 'updates.json?t=' + Date.now())
+    if (res.ok) {
+      const data = await res.json()
+      items = data[APP_VERSION]
+    }
+  } catch {
+    // 失敗時はモーダルを出さない
+  }
+
+  if (!items || items.length === 0) {
+    localStorage.setItem(VERSION_KEY, APP_VERSION)
+    return
+  }
+
+  $('updateVersion').textContent = 'v' + APP_VERSION
+  $('updateBody').innerHTML = items.map((t) => `<li>${escapeHtml(t)}</li>`).join('')
+  const modal = $('updateModal')
+  openModal(modal)
+  $('updateCloseBtn').addEventListener('click', () => {
+    localStorage.setItem(VERSION_KEY, APP_VERSION)
+    closeModal(modal)
+  }, { once: true })
+}
+
 // --- Service Worker ---
 
 if ('serviceWorker' in navigator) {
@@ -497,3 +566,4 @@ if ('serviceWorker' in navigator) {
 checkAndResetIfNeeded()
 render()
 refreshAllCreators()
+checkVersionUpdate()
