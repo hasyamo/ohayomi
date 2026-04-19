@@ -522,12 +522,6 @@ async function checkVersionUpdate() {
   const lastSeen = localStorage.getItem(VERSION_KEY)
   if (lastSeen === APP_VERSION) return
 
-  // 初回はメッセージを出さず記録のみ
-  if (!lastSeen) {
-    localStorage.setItem(VERSION_KEY, APP_VERSION)
-    return
-  }
-
   // 現バージョンの更新内容を取得
   let items = null
   try {
