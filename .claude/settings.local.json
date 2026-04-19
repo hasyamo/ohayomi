@@ -20,26 +20,7 @@
       "Bash(git -C C:mecodeohayomi status)",
       "Bash(node -e:*)",
       "Bash(npx sharp-cli:*)",
-      "Bash(where:*)",
-      "Bash(./node_modules/.bin/vite:*)",
-      "WebFetch(domain:note.com)",
-      "Bash(git checkout *)",
-      "Bash(curl -s 'https://falling-mouse-736b.hasyamo.workers.dev/?id=hasyamo')",
-      "Bash(python3 -m json.tool)",
-      "Bash(cp /Users/hashimoto/Desktop/dev/note-fan-board/images/eyes-*.webp /Users/hashimoto/Desktop/dev/ohayomi/public/characters/eyes/)",
-      "Bash(cp /Users/hashimoto/Desktop/dev/ohenji-note/public/icons/chibi/chibi-*.png /Users/hashimoto/Desktop/dev/ohayomi/public/characters/chibi/)",
-      "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" http://localhost:5173/ohayomi/characters/eyes/eyes-sat.webp)",
-      "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" http://localhost:5173/characters/eyes/eyes-sat.webp)",
-      "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" http://localhost:5173/ohayomi/manual.html)",
-      "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" http://localhost:5173/ohayomi/characters/eyes/eyes-sun.webp)",
-      "Bash(curl -s -I http://localhost:5173/ohayomi/manual.html)",
-      "Bash(gh auth *)",
-      "Bash(gh repo *)",
-      "Bash(gh api *)",
-      "Bash(gh run *)",
-      "Bash(identify /Users/hashimoto/Downloads/ohayomi-next.png)",
-      "Bash(sips -g pixelWidth -g pixelHeight /Users/hashimoto/Downloads/ohayomi-next.png)",
-      "Bash(git branch *)"
+      "Bash(where:*)"
     ]
   }
 }
